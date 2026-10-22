@@ -1,0 +1,52 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {"image": "teddy.png"},
+    "_meta": {"title": "sf_image"}
+  },
+  "2": {
+    "class_type": "SculptForgeInflateImage",
+    "inputs": {"image": ["1", 0], "mask": ["1", 1], "thickness": 0.8, "resolution": 128, "subdivisions": 1},
+    "_meta": {"title": "SculptForge Inflate Image"}
+  },
+  "3": {
+    "class_type": "SculptForgeToMesh",
+    "inputs": {"mesh": ["2", 0]},
+    "_meta": {"title": "SculptForge to MESH"}
+  },
+  "4": {
+    "class_type": "GetMeshInfo",
+    "inputs": {"mesh": ["3", 0]},
+    "_meta": {"title": "Get Mesh Info (core)"}
+  },
+  "5": {
+    "class_type": "SaveGLB",
+    "inputs": {"mesh": ["4", 0], "filename_prefix": "3d/core_save"},
+    "_meta": {"title": "Save 3D Model (core)"}
+  },
+  "6": {
+    "class_type": "SculptForgeVoxelRemesh",
+    "inputs": {"mesh": ["4", 0], "resolution": 160},
+    "_meta": {"title": "SculptForge Voxel Remesh (core MESH in)"}
+  },
+  "7": {
+    "class_type": "SculptForgeDecimate",
+    "inputs": {"mesh": ["6", 0], "ratio": 0.5, "triangles": 0},
+    "_meta": {"title": "SculptForge Decimate"}
+  },
+  "8": {
+    "class_type": "SculptForgeMeshInfo",
+    "inputs": {"mesh": ["7", 0]},
+    "_meta": {"title": "SculptForge Mesh Info"}
+  },
+  "9": {
+    "class_type": "SculptForgeLODChain",
+    "inputs": {"mesh": ["7", 0], "levels": 3, "ratio": 0.5, "filename_prefix": "3d/SculptForge_roundtrip_lods"},
+    "_meta": {"title": "SculptForge LOD Chain"}
+  },
+  "10": {
+    "class_type": "SculptForgeExport",
+    "inputs": {"mesh": ["7", 0], "format": "fbx", "filename_prefix": "3d/SculptForge_roundtrip"},
+    "_meta": {"title": "SculptForge Export"}
+  }
+}

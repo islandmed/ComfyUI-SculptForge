@@ -1,0 +1,70 @@
+{
+  "1": {
+    "class_type": "ImageOnlyCheckpointLoader",
+    "inputs": {"ckpt_name": "hunyuan_3d_v2.1.safetensors"},
+    "_meta": {"title": "Load Hunyuan3D 2.1 (models/checkpoints)"}
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {"image": "teddy.png"},
+    "_meta": {"title": "sf_image"}
+  },
+  "3": {
+    "class_type": "ModelSamplingAuraFlow",
+    "inputs": {"model": ["1", 0], "shift": 1.0},
+    "_meta": {"title": "ModelSamplingAuraFlow"}
+  },
+  "4": {
+    "class_type": "CLIPVisionEncode",
+    "inputs": {"clip_vision": ["1", 1], "image": ["2", 0], "crop": "center"},
+    "_meta": {"title": "CLIP Vision Encode"}
+  },
+  "5": {
+    "class_type": "Hunyuan3Dv2Conditioning",
+    "inputs": {"clip_vision_output": ["4", 0]},
+    "_meta": {"title": "Hunyuan3Dv2 Conditioning"}
+  },
+  "6": {
+    "class_type": "EmptyLatentHunyuan3Dv2",
+    "inputs": {"resolution": 4096, "batch_size": 1},
+    "_meta": {"title": "Empty Latent Hunyuan3Dv2"}
+  },
+  "7": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["3", 0], "positive": ["5", 0], "negative": ["5", 1], "latent_image": ["6", 0],
+      "seed": 1234, "steps": 30, "cfg": 5.0, "sampler_name": "euler", "scheduler": "normal", "denoise": 1.0
+    },
+    "_meta": {"title": "sf_seed"}
+  },
+  "8": {
+    "class_type": "VAEDecodeHunyuan3D",
+    "inputs": {"samples": ["7", 0], "vae": ["1", 2], "num_chunks": 8000, "octree_resolution": 256},
+    "_meta": {"title": "VAE Decode Hunyuan3D"}
+  },
+  "9": {
+    "class_type": "VoxelToMesh",
+    "inputs": {"voxel": ["8", 0], "algorithm": "surface net", "threshold": 0.6},
+    "_meta": {"title": "Voxel to Mesh"}
+  },
+  "10": {
+    "class_type": "SculptForgeVoxelRemesh",
+    "inputs": {"mesh": ["9", 0], "resolution": 256},
+    "_meta": {"title": "SculptForge Voxel Remesh"}
+  },
+  "11": {
+    "class_type": "SculptForgeExport",
+    "inputs": {"mesh": ["10", 0], "format": "glb", "filename_prefix": "3d/SculptForge_hunyuan3d"},
+    "_meta": {"title": "SculptForge Export (sculpt-ready GLB)"}
+  },
+  "12": {
+    "class_type": "SculptForgeLODChain",
+    "inputs": {"mesh": ["10", 0], "levels": 4, "ratio": 0.5, "filename_prefix": "3d/SculptForge_hunyuan3d_lods"},
+    "_meta": {"title": "SculptForge LOD Chain (game LODs)"}
+  },
+  "13": {
+    "class_type": "SculptForgeExport",
+    "inputs": {"mesh": ["10", 0], "format": "usdz", "filename_prefix": "3d/SculptForge_hunyuan3d"},
+    "_meta": {"title": "SculptForge Export (USDZ for VFX / AR)"}
+  }
+}

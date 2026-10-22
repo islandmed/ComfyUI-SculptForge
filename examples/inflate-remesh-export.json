@@ -1,0 +1,22 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {"image": "teddy.png"},
+    "_meta": {"title": "sf_image"}
+  },
+  "2": {
+    "class_type": "SculptForgeInflateImage",
+    "inputs": {"image": ["1", 0], "mask": ["1", 1], "thickness": 1.0, "resolution": 160, "subdivisions": 1},
+    "_meta": {"title": "SculptForge Inflate Image"}
+  },
+  "3": {
+    "class_type": "SculptForgeVoxelRemesh",
+    "inputs": {"mesh": ["2", 0], "resolution": 200},
+    "_meta": {"title": "SculptForge Voxel Remesh"}
+  },
+  "4": {
+    "class_type": "SculptForgeExport",
+    "inputs": {"mesh": ["3", 0], "format": "glb", "filename_prefix": "3d/SculptForge_teddy"},
+    "_meta": {"title": "SculptForge Export"}
+  }
+}

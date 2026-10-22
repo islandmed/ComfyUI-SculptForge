@@ -1,0 +1,29 @@
+[project]
+name = "comfyui-sculptforge"
+description = "SculptForge for ComfyUI: turn generated 3D (Hunyuan3D, TRELLIS, image inflate) into sculpt-ready, game-ready and VFX-ready assets - voxel remesh, decimate, subdivide, LOD chains, export to GLB, FBX, USD/USDZ, OBJ, STL. Needs the free SculptForge CLI."
+version = "0.1.0"
+license = { text = "GPL-3.0-or-later" }
+readme = "README.md"
+requires-python = ">=3.10"
+# numpy, torch and Pillow come with ComfyUI; the work is done by the sculptforge-cli executable.
+dependencies = []
+classifiers = [
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+]
+keywords = ["3d", "mesh", "remesh", "sculpting", "lod", "glb", "fbx", "usd", "hunyuan3d", "trellis"]
+
+[project.urls]
+Repository = "https://github.com/islandmed/SculptForge"
+Documentation = "https://github.com/islandmed/SculptForge/tree/main/integrations/comfyui/ComfyUI-SculptForge"
+"Bug Tracker" = "https://github.com/islandmed/SculptForge/issues"
+
+[tool.comfy]
+PublisherId = "islandmed"
+DisplayName = "SculptForge"
+Icon = "https://raw.githubusercontent.com/islandmed/SculptForge/main/assets/branding/sculptforge-256.png"
+includes = []
+
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib -p no:cacheprovider"
+testpaths = ["tests"]
