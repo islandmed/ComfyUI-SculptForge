@@ -14,7 +14,7 @@ classifiers = [
 keywords = ["3d", "mesh", "remesh", "sculpting", "lod", "glb", "fbx", "usd", "hunyuan3d", "trellis"]
 
 [project.urls]
-Repository = "https://github.com/islandmed/SculptForge"
+Repository = "https://github.com/islandmed/ComfyUI-SculptForge"
 Documentation = "https://github.com/islandmed/SculptForge/tree/main/integrations/comfyui/ComfyUI-SculptForge"
 "Bug Tracker" = "https://github.com/islandmed/SculptForge/issues"
 

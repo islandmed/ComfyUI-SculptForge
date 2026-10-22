@@ -45,22 +45,22 @@ python main.py
 
 ### 2. Install the nodes
 
-**ComfyUI-Manager:** search for **SculptForge** in *Custom Nodes Manager* and click *Install*, or with comfy-cli:
+**ComfyUI-Manager:** open *Custom Nodes Manager*, choose *Install via Git URL* and paste
+`https://github.com/islandmed/ComfyUI-SculptForge`.
+
+**Manually:** clone it into `ComfyUI/custom_nodes`:
 
 ```sh
-comfy node install comfyui-sculptforge
+cd ComfyUI/custom_nodes
+git clone https://github.com/islandmed/ComfyUI-SculptForge.git
 ```
 
-**Manually:** the pack lives in the SculptForge repository, in `integrations/comfyui/ComfyUI-SculptForge`. Clone the
-repository and link (or copy) that folder into `ComfyUI/custom_nodes`:
+Restart ComfyUI; the nodes appear under **SculptForge** in the node library.
 
-```sh
-git clone --depth 1 https://github.com/islandmed/SculptForge.git
-ln -s "$PWD/SculptForge/integrations/comfyui/ComfyUI-SculptForge" ComfyUI/custom_nodes/ComfyUI-SculptForge
-```
-
-On Windows, copy the folder, or use `mklink /D` from an administrator prompt. Restart ComfyUI; the nodes appear under
-**SculptForge** in the node library.
+The pack is developed in the [SculptForge repository](https://github.com/islandmed/SculptForge) under
+`integrations/comfyui/ComfyUI-SculptForge` and mirrored to
+[islandmed/ComfyUI-SculptForge](https://github.com/islandmed/ComfyUI-SculptForge); please open issues and pull
+requests on the main repository.
 
 ## Nodes
 
