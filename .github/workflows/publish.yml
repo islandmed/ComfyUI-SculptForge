@@ -1,0 +1,23 @@
+name: Publish to the Comfy Registry
+
+# Runs in the islandmed/ComfyUI-SculptForge mirror when pyproject.toml changes (bump `version` to release).
+# Needs the repository secret REGISTRY_ACCESS_TOKEN: an API key for publisher "islandmed" from
+# https://registry.comfy.org (Settings > API keys).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [pyproject.toml]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.repository == 'islandmed/ComfyUI-SculptForge'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Comfy-Org/publish-node-action@v1
+        with:
+          personal_access_token: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
